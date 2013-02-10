@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block base_content%}
+    <div class="row">
+        <h1>List of members</h1>
+        <p>List of members tournament</p>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>ELO</th>
+        </tr>
+
+        {% for member in members %}
+            <tr>
+                <td>{{ member.name }}</td>
+                <td>{{ member.elo }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

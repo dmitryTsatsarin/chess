@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block base_content%}
+    <div class="row">
+        <h1>Tournament</h1>
+        <p>Results about tournament</p>
+    </div>
+
+    <div class="row">
+        <h3>Members List</h3>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>ELO</th>
+            </tr>
+
+            {% for member in members %}
+                <tr>
+                    <td>{{ member.name }}</td>
+                    <td>{{ member.elo }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <hr>
+    <div class="row">
+        <h3>Tours</h3>
+        <table class="table table-striped">
+            <tr>
+                <th>Player 1</th>
+                <th>Player 2</th>
+                <th>Points</th>
+            </tr>
+
+            {% for item in tours %}
+                {% ifchanged %}
+                    <tr>
+                        <td colspan="3"><h3>Tour {{ item.tour }}</h3></td>
+                    </tr>
+
+
+
+                {% endifchanged %}
+                <tr>
+                    <td>{{ item.player1.name }}</td>
+                    <td>{{ item.player2.name }}</td>
+                    <td> {{ item.points }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    {% if elo_new_flag %}
+        <div class="row">
+            <h3>New ELO rating</h3>
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>ELO</th>
+                    <th>new ELO</th>
+                </tr>
+
+                {% for member in members %}
+                    <tr>
+                        <td>{{ member.name }}</td>
+                        <td>{{ member.elo }}</td>
+                        <td>{{ member.elo_new }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

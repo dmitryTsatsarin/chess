@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block base_content%}
+    <div class="row">
+        <h1>New member</h1>
+        <p>Add member to the list of tournament</p>
+    </div>
+
+
+    {% if memberForm %}
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ memberForm }}
+
+                <div><button type="submit" class="btn-inverse btn-large">Submit</button></div>
+            </fieldset>
+        </form>
+    {% endif %}
+
+
+
+
+{% endblock %}

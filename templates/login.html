@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block base_content%}
+    <div class="row">
+        <h1>Login page</h1>
+        {% if form.errors %}
+            <p class="error">Uncorrect login or password</p>
+        {% endif %}
+
+        <form action='' method='post'>
+            {% csrf_token %}
+            <label for="username">Login:</label>
+            <input type="text" name="username" value="" id="username">
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="" id="password">
+
+            <div>
+                <input type="submit" class="btn-large btn-inverse" value="login" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Chess Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/tsd_styles.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('.dropdown-toggle').dropdown()
+        });
+
+
+    </script>
+
+
+
+  </head>
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Chess Project</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Members <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/member/add/">Add</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/member/list/">List</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tournament <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/tournament/judge/">Judge tournament</a></li>
+                            <li><a href="/tournament/results/">Results</a></li>
+                        </ul>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li><a href="/accounts/logout/">Logout {{ user.username }}</a></li>
+                    {% else %}
+                        <li><a href="/accounts/login/">Login</a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+        {% block messages %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+            {% endif %}
+        {% endblock %}
+
+        {% block base_content%}
+
+        {% endblock %}
+
+    </div> <!-- /container -->
+
+
+
+  </body>
+</html>

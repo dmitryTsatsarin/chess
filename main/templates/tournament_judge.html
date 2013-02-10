@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block base_content%}
+    <div class="row">
+        <h1>Judgment tournament</h1>
+        <p>Information about tournament</p>
+    </div>
+    {% if start_flag %}
+        <div class="row">
+            <a href="/tournament/start/">Start tournament</a> ( You can not add members after it )
+
+        </div>
+    {% endif %}
+
+    {% if form_show_flag %}
+        <h1>Tour {{ tour_num }}</h1>
+        <form method="post" action="">
+            <input type="hidden" value="{{ tour_num }}" name="tour_num">
+            {% csrf_token %}
+            <table class="table table-striped">
+                <tr>
+                    <th>Player 1</th>
+                    <th>Player 2</th>
+                    <th>Points</th>
+                </tr>
+
+                {% for item in tour %}
+                    <tr>
+                        <td>{{ item.player1.name }}</td>
+                        <td>{{ item.player2.name }}</td>
+                        <td> {% if item.points %}{{ item.points }}
+                            {% else %}
+                                <input type="text" name="points_{{ item.id }}">
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        <input type="submit" class="btn-large btn-inverse">
+       </form>
+    {% endif %}
+    <div class="row">
+        <a href="/tournament/zeroing/"> Delete tournament</a> (reset all tours )
+    </div>
+
+
+
+{% endblock %}
